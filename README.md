@@ -11,9 +11,9 @@ It is for Windows only.
 It has only a handful of features but it serves my purposes well and
 has a low memory foot print.
 
-## Other options
+## Alternative screenshot program for Windows
 
-If you need something with more features I recommend Greeshot - visit:
+If you need something with more features I recommend Greenshot - visit:
 
 [Greenshot](http://getgreenshot.org)
 
@@ -124,7 +124,7 @@ to be reachable on the network.
 
 By default the command line option `-u` (`--udp`) causes the `pngshot.py` program
 to listen for UDP packets on port 8333. If you want to listen on a different port (perhaps
-because another program isalready using port 8333) then specify a different port. For example:
+because another program is already using port 8333) then specify a different port. For example:
 
 ```
 python pngshot.py -u -p 6543
@@ -139,7 +139,7 @@ the `scrtrigger.py` program. In this case as follows:
 python scrtrigger.py 10.1.1.100:6543
 ```
 
-## "I always get "NUM LOCK: ON" in every screenshot
+## "I always get NUM LOCK: ON in every screenshot"
 
 Some Windows 10 set ups display "NUM LOCK: ON" for a few seconds in the bottom right
 hand corner of the screen whenever you press the Num Lock key. As a result this always
@@ -152,7 +152,7 @@ The delay allows time for the message to disappear before actually taking the sc
 however, slow you down in a way that will quickly become frustrating.
 
 Second is to use the `scrtrigger.py` program on a second machine to trigger the
-screeshots. However, you may not have a second machine handy for doing this.
+screenshots. However, you may not have a second machine handy for doing this.
 
 Another approach is to tweak the Windows setup so it doesn't display "NUM LOCK: ON" in the
 first place. It must be possible - if you know how please let me know so I can
