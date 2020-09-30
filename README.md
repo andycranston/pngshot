@@ -4,7 +4,7 @@ A simple screenshot program to capture screenshots in lossless PNG format.
 
 ## Overview
 
-This Python 3 progranm uses the PyAutoGUI module to take screenshots.
+This Python 3 program uses the PyAutoGUI module to take screenshots.
 
 It is for Windows only.
 
