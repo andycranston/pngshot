@@ -145,7 +145,7 @@ python scrtrigger.py 10.1.1.100:6543
 
 ## "I always get NUM LOCK: ON in every screenshot"
 
-Some Windows 10 set ups display "NUM LOCK: ON" for a few seconds in the bottom right
+Some Windows 10 systems display "NUM LOCK: ON" for a few seconds in the bottom right
 hand corner of the screen whenever you press the Num Lock key. As a result this always
 appears in every screenshot.
 
