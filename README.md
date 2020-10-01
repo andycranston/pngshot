@@ -11,6 +11,10 @@ It is for Windows only.
 It has only a handful of features but it serves my purposes well and
 has a low memory foot print.
 
+## Known limitations
+
+Does work predictably or even at all on systems with more than one display.
+
 ## Alternative screenshot program for Windows
 
 If you need something with more features I recommend Greenshot - visit:
@@ -158,7 +162,21 @@ Another approach is to tweak the Windows setup so it doesn't display "NUM LOCK: 
 first place. It must be possible - if you know how please let me know so I can
 update this README document - thankyou.
 
+## Core code in the `scrtrigger.py` program
 
+The actual Python 3 code to send a UDP packet to the `pngshot.py` program to trigger
+a screenshot can be reduced to:
+
+```
+import socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.sendto('please take a screenshot now'.encode(), ('10.1.1.100', 8333))
+sock.close()
+```
+
+This code segment sends the UDP packet to host with IPv4 address 10.1.1.100 using UDP port 8333.
+
+Using this as a basis you can build your own program to trigger screenshots.
 
 ---------------------------------------------------
 End of README.md
