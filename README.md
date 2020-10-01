@@ -8,18 +8,39 @@ This Python 3 program uses the PyAutoGUI module to take screenshots.
 
 It is for Windows only.
 
-It has only a handful of features but it serves my purposes well and
-has a low memory foot print.
+It has only a handful of features but it serves my purposes well.
 
 ## Known limitations
 
-Does work predictably or even at all on systems with more than one display.
+Does NOT work predictably or even at all on systems with more than one display.
 
 ## Alternative screenshot program for Windows
 
 If you need something with more features I recommend Greenshot - visit:
 
 [Greenshot](http://getgreenshot.org)
+
+However, this is not the only alternative - visit:
+
+[10 Best Screenshot Tools for Windows 10](https://www.bettertechtips.com/windows/screenshot-tool-windows-10/)
+
+for more options.
+
+## "So why pngshot?"
+
+Well I have tried some (but not all) of the screenshot programs available on
+the Internet and I am sure there are some that have this feature but I have yet to
+find one with this feature:
+
+```
+Trigger a screenshot when a request is sent over the network from another system
+```
+
+Let me know of any screenshot programs that do this - I will be very grateful.
+
+In the meantime I have implemented this feature in my `pngshot.py` program.
+
+Read on...
 
 ## Quick start
 
