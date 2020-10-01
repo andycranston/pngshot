@@ -178,5 +178,21 @@ This code segment sends the UDP packet to host with IPv4 address 10.1.1.100 usin
 
 Using this as a basis you can build your own program to trigger screenshots.
 
+## The `pshot.py` and `pshot.css` files
+
+There are two extra files in this repository which need a mention.
+
+The `pshot.py` file is a Python 3 program that can be run on a web server as a CGI script
+to allow screenshots to be triggered from a web page.
+
+The `pshot.css` file is the CSS style sheet that `pshot.py` references. At present I think
+it takes away "style" rather than adding it :-)
+
+Note that both of these file are under development but feel free to try them.
+
+I have had success running `pshot.py` on the `lighttpd` ("lighty") web server as a CGI script using
+a Python 3 interpreter. This was on virtual machine running OpenBSD version 6.6.
+
+
 ---------------------------------------------------
 End of README.md
