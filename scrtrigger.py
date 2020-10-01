@@ -1,36 +1,22 @@
 #! /usr/bin/python3
 #
-# @(!--#) @(#) scrtrigger.py, version 001, 09-october-2019
+# @(!--#) @(#) scrtrigger.py, version 002, 01-october-2020
 #
-# trigger a screenshot by sending a UDP packet to the scrshot.py program
-#
+# trigger a screenshot by sending a UDP packet to
+# the scrshot.py program
 #
 
-############################################################################
-
-DEBUG = False
-
-############################################################################
+########################################################################
 
 import sys
 import os
 import socket
 
-############################################################################
+########################################################################
 
 DEFAULT_UDP_PORT = 8333
 
-############################################################################
-
-def string2bytearray(s):
-    ba = bytearray(len(s))
-
-    for i in range(0, len(s)):
-        ba[i] = ord(s[i])
-
-    return ba
-
-############################################################################
+########################################################################
 
 #
 # Main
@@ -39,14 +25,10 @@ def string2bytearray(s):
 def main():
     global progname
 
-    if DEBUG:
-        print(sys.argv)
-        print(len(sys.argv))
-
-    if len(sys.argv) <= 1:
-        hostandudp = '127.0.0.1'
-    else:
+    if len(sys.argv) > 1:
         hostandudp = sys.argv[1]
+    else:
+        hostandudp = '127.0.0.1'
 
     fields = hostandudp.split(':')
 
@@ -57,22 +39,17 @@ def main():
     else:
         udp = DEFAULT_UDP_PORT
 
-    payloadstring = 'please take a screenshot now'
-    packetpayload = string2bytearray(payloadstring)
-
-    print('Sending "{}" to host {} on UDP port {}'.format(payloadstring, host, udp))
+    print('Triggering screenshot on host {} using UDP port {}'.format(host, udp))
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-
-    sock.sendto(packetpayload, (host, udp))
-
+    sock.sendto('please take a screenshot now'.encode(), (host, udp))
     sock.close()
 
     print('Done')
 
     return 0
 
-############################################################################
+########################################################################
 
 progname = os.path.basename(sys.argv[0])
 
