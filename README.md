@@ -12,7 +12,7 @@ It has only a handful of features but it serves my purposes well.
 
 ## Known limitations
 
-Does NOT work predictably or even at all on systems with more than one display.
+It does not work predictably or even at all on systems with more than one display.
 
 ## Alternative screenshot program for Windows
 
