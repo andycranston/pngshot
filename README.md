@@ -14,7 +14,7 @@ program.
 
 ## Known limitations
 
-It does not work predictably or even at all on systems with more than one
+It does not work predictably (or even at all) on systems with more than one
 display.
 
 ## Alternative screenshot program for Windows
@@ -34,7 +34,7 @@ for more options.
 ## "So why pngshot?"
 
 I have tried some of the screenshot programs available on
-the Internet but I could find one with this feature:
+the Internet but I could not find one with this feature:
 
 ```
 Trigger a screenshot when a request is sent over the network from another system
@@ -56,7 +56,7 @@ python pngshot.py
 ```
 
 A "spinner" appears - this is a repeating of sequence of the / - \ and | characters. You will
-see the effect when you run the program. It basically means the program is ready to take
+see the effect when you run the program. It means the `pngshot.py` program is ready to take
 screenshots.
 
 Copy the `scrtrigger.py` Python program to another system on your network that has
@@ -173,6 +173,28 @@ Note that both of these file are under development but feel free to try them.
 
 I have had success running `pshot.py` on the `lighttpd` ("lighty") web server as a CGI script using
 a Python 3 interpreter. This was on virtual machine running OpenBSD version 6.6.
+
+## Security notes
+
+Depending on your systems (the one running the `pngshot.py` program and the one which
+runs the `scrtrigger.py` program) you may need to configure firewalls to allow
+the UDP traffic on port 8333 to flow between them. If you are using a different UDP port number
+via the `-p` (or `--port`) command line option then take this into account.
+
+When I say "specially crafted UDP packet" I simply mean one with the following
+ASCII text in it:
+
+```
+please take a screenshot now
+```
+
+This means that any system that can send UDP packets to port 8333
+(or whatever port number is being used by the `pngshot.py` program)
+can trigger a screenshot.
+
+If you think this poses a security risk to your environment then, quite simply,
+do not use this software.
+
 
 ---------------------------------------------------
 End of README.md
