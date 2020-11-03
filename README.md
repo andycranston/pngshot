@@ -1,6 +1,6 @@
 # pngshot
 
-A simple screenshot program to capture screenshots in lossless PNG format.
+A simple screenshot program to capture screenshots in PNG format.
 
 ## Overview
 
@@ -34,7 +34,7 @@ for more options.
 ## "So why pngshot?"
 
 I have tried some of the screenshot programs available on
-the Internet but I could not find one with this feature:
+the Internet but I have yet to find one with this feature:
 
 ```
 Trigger a screenshot when a request is sent over the network from another system
@@ -43,7 +43,8 @@ Trigger a screenshot when a request is sent over the network from another system
 I am sure there are some screenshot programs available on the Internet that have
 this feature. Let me know of any that do - I will be very grateful.
 
-In the meantime I have implemented this feature in my `pngshot.py` program.
+In the meantime I have implemented this feature in my `pngshot.py` screenshot
+program.
 
 Read on...
 
@@ -68,6 +69,10 @@ python scrtrigger.py 10.1.1.100
 
 Change the IPv4 address `10.1.1.100` to the IP address of the system running the `pngshot.py`
 program.
+
+The `scrtrigger.py` program sends a specially crafted UDP packet over
+the network on UDP port 8333 to the `pngshot.py` program. When the `pngshot.py`
+program receieves this packet it takes a screenshot.
 
 By default screenshots are saved in the current directory on the system running the `pngshot.py`
 program.
@@ -97,7 +102,8 @@ for the screenshot files to be saved in. For example:
 python pngshot.py -d C:\TEMP
 ```
 
-would put the screenshot files in the `C:\TEMP` directory.
+would put the screenshot files in the `C:\TEMP` directory on the system
+running the `pngshot.py` program.
 
 ## Command line option -s / --seconds
 
@@ -128,8 +134,8 @@ python pngshot.py -p 6543
 
 would listen on port 6543 instead.
 
-This also means you need to specify the port number as well as the IPv4 address when using
-the `scrtrigger.py` program. For example:
+This also means you need to specify the port number in addition to the IPv4 address
+when using the `scrtrigger.py` program. For example:
 
 ```
 python scrtrigger.py 10.1.1.100:6543
