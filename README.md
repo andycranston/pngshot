@@ -8,7 +8,9 @@ This Python 3 program uses the PyAutoGUI module to take screenshots.
 
 It is for Windows only.
 
-It has only a handful of features but it serves my purposes well.
+Screenshots are triggered by the receipt of a specially crafted UDP packet so
+you will need a second system on your network to run the triggering
+program.
 
 ## Known limitations
 
@@ -16,7 +18,8 @@ It does not work predictably or even at all on systems with more than one displa
 
 ## Alternative screenshot program for Windows
 
-If you need something with more features I recommend Greenshot - visit:
+If you need something with more features (like being able to trigger screenshots
+by pressing keyboard sequences such as Alt plus Print Screen) then I recommend Greenshot - visit:
 
 [Greenshot](http://getgreenshot.org)
 
@@ -28,7 +31,7 @@ for more options.
 
 ## "So why pngshot?"
 
-Well I have tried some (but not all) of the screenshot programs available on
+Well I have tried some of the screenshot programs available on
 the Internet and I am sure there are some that have this feature but I have yet to
 find one with this feature:
 
@@ -36,7 +39,8 @@ find one with this feature:
 Trigger a screenshot when a request is sent over the network from another system
 ```
 
-Let me know of any screenshot programs that do this - I will be very grateful.
+I am sure there are some screenshot programs available on the Internet that have
+this feature. Let me know of any that do - I will be very grateful.
 
 In the meantime I have implemented this feature in my `pngshot.py` program.
 
@@ -54,25 +58,18 @@ A "spinner" appears - this is a repeating of sequence of the / - \ and | charact
 see the effect when you run the program. It basically means the program is ready to take
 screenshots.
 
-To take a screenshot press the Num Lock key on the keyboard. The Num Lock light on your keyboard
-will turn on. The program recognises
-that the Num Lock key has been pressed and takes a screenshot and saves it to a
-PNG file. It then automatically turns off Num Lock making the Num Lock light on your
-keyboard turn off. This is how you know the program has taken a screenshot.
-
-Screenshots are saved in the subdirectory called "Pictures" in the directory
-named by the `USERPROFILE` environment variable. For example on my Windows 10
-machine `USERPROFILE` is set to:
+Copy the `scrtrigget.py` Python program to another system on your network that has
+a Python 3 interpreter installed on it and type:
 
 ```
-C:\Users\Andy C
+python scrtrigger.py 10.1.1.100
 ```
 
-so my screenshots are saved to the following subdirectory:
+Change the IPv4 address `10.1.1.100` to the IP address of the system running the `pngshot.py`
+program.
 
-```
-C:\Users\Andy C\Pictures
-```
+By default screenshots are saved in the current directory on the system running the `pngshot.py`
+program.
 
 The screenshots have a filename based on:
 
@@ -103,7 +100,9 @@ would put the screenshot files in the `C:\TEMP` directory.
 
 ## Command line option -s / --seconds
 
-Normally a screenshot is take immediately after the Num Lock key is pressed.
+Normally a screenshot is take as soon as the `scrtrigger.py` program on the other
+system has send the specially crafted UDP packet to the system running the `pngshot.py`
+program.
 
 However, the command line option `-s` (or `--seconds`) can be used to specify a number
 of seconds to wait between the Num Lock key being pressed and the screenshot being taken.
@@ -116,43 +115,14 @@ python pngshot.py -s 5
 would wait 5 seconds between pressing Num Lock and taking the screenshot. This can be handy
 for situations where a certain sequence keyboard strokes need to be make to get the image required.
 
-## Command line option -u / --udp
-
-The command line option `-u` (or `--udp`) can be used to enable screenshots
-to be triggered by sending special UDP packets to the `pngshot.py` program.
-For example:
-
-```
-python pngshot.py -u
-```
-
-When running in this mode screenshots can still be triggered by pressing the Num Lock key
-but they can also be triggered by running the `scrtrigger.py` program as follows:
-
-```
-python scrtrigger.py
-```
-
-This is only really useful if you copy the `scrtrigger.py` program to a different host
-and run is as follows:
-
-```
-python scrtrigger.py 10.1.1.100
-```
-
-where 10.1.1.100 is the IPv4 address of the machine running the `pngshot.py` program.
-
-This means from a second machine you can trigger a screenshot on the first machine. It just has
-to be reachable on the network.
-
 ## Command line option -p / --port
 
-By default the command line option `-u` (`--udp`) causes the `pngshot.py` program
-to listen for UDP packets on port 8333. If you want to listen on a different port (perhaps
+By default the `pngshot.py` program
+listens for UDP packets on port 8333. If you want to listen on a different port (perhaps
 because another program is already using port 8333) then specify a different port. For example:
 
 ```
-python pngshot.py -u -p 6543
+python pngshot.py -p 6543
 ```
 
 would listen on port 6543 instead.
@@ -164,28 +134,11 @@ the `scrtrigger.py` program. In this case as follows:
 python scrtrigger.py 10.1.1.100:6543
 ```
 
-## "I always get NUM LOCK: ON in every screenshot"
 
-Some Windows 10 systems display "NUM LOCK: ON" for a few seconds in the bottom right
-hand corner of the screen whenever you press the Num Lock key. As a result this always
-appears in every screenshot.
-
-There are two ways around this.
-
-First is to specify a delay of 6 or 7 seconds using the `-s` (`--seconds`) command line option.
-The delay allows time for the message to disappear before actually taking the screenshot. It will,
-however, slow you down in a way that will quickly become frustrating.
-
-Second is to use the `scrtrigger.py` program on a second machine to trigger the
-screenshots. However, you may not have a second machine handy for doing this.
-
-Another approach is to tweak the Windows setup so it doesn't display "NUM LOCK: ON" in the
-first place. It must be possible - if you know how please let me know so I can
-update this README document - thankyou.
 
 ## Core code in the `scrtrigger.py` program
 
-The actual Python 3 code to send a UDP packet to the `pngshot.py` program to trigger
+The Python 3 code to send a UDP packet to the `pngshot.py` program to trigger
 a screenshot can be reduced to:
 
 ```
@@ -213,7 +166,6 @@ Note that both of these file are under development but feel free to try them.
 
 I have had success running `pshot.py` on the `lighttpd` ("lighty") web server as a CGI script using
 a Python 3 interpreter. This was on virtual machine running OpenBSD version 6.6.
-
 
 ---------------------------------------------------
 End of README.md
